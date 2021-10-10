@@ -13,6 +13,9 @@ import {
 } from 'react-native';
 import picBiscuits from './assets/biscuit.jpg';
 import picJungle from './assets/jungle.jpg';
+import ColorButton from './components/ColorButton';
+
+
 
 const { height, width } = Dimensions.get('window');
 export default function App() {
@@ -22,15 +25,11 @@ export default function App() {
   };
   return (
     <View style={[styles.container, { backgroundColor }]}>
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => setbackgroundColor('yellow')}
-        underlayColor="orange">
-        <View style={styles.row}>
-          <View style={[styles.sample, { backgroundColor: 'yellow' }]} />
-          <Text style={styles.buttonText}>yellow</Text>
-        </View>
-      </TouchableHighlight>
+      <ColorButton backgroundColor="red" onPress={setbackgroundColor} />
+      <ColorButton backgroundColor="green" onPress={setbackgroundColor} />
+      <ColorButton backgroundColor="blue" onPress={setbackgroundColor} />
+      <ColorButton backgroundColor="yellow" onPress={setbackgroundColor} />
+      <ColorButton backgroundColor="purple" onPress={setbackgroundColor} />
       {/* <Text style={styles.button} onPress={() => setbackgroundColor('green')}>green</Text>
       <Text style={styles.button} onPress={() => setbackgroundColor('red')}>red</Text>
       <Image style={styles.image} source={picBiscuits} />
@@ -54,30 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {
-    margin: 10,
-    padding: 10,
-    borderWidth: 2,
-    borderRadius: 10,
-    alignSelf: 'stretch',
-    backgroundColor: 'rgba(255,255,255,.8)',
-  },
 
-  buttonText: {
-    fontSize: 30,
-    textAlign: 'center',
-  },
-
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  sample: {
-    height: 20,
-    width: 20,
-    borderRadius: 10,
-    backgroundColor: 'white',
-  },
   // page: {
   //   flex: 1,
   //   justifyContent: "center",
