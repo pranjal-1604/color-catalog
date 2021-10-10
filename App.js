@@ -10,9 +10,11 @@ import {
   Platform,
   Image,
   TouchableHighlight,
+  FlatList
 } from 'react-native';
 import picBiscuits from './assets/biscuit.jpg';
 import picJungle from './assets/jungle.jpg';
+import defaultColors from './data/defaultColors.json';
 import ColorButton from './components/ColorButton';
 
 
@@ -24,25 +26,28 @@ export default function App() {
     Alert.alert(`${new Date().toLocaleTimeString()} button press`);
   };
   return (
-    <View style={[styles.container, { backgroundColor }]}>
-      <ColorButton backgroundColor="red" onPress={setbackgroundColor} />
-      <ColorButton backgroundColor="green" onPress={setbackgroundColor} />
-      <ColorButton backgroundColor="blue" onPress={setbackgroundColor} />
-      <ColorButton backgroundColor="yellow" onPress={setbackgroundColor} />
-      <ColorButton backgroundColor="purple" onPress={setbackgroundColor} />
-      {/* <Text style={styles.button} onPress={() => setbackgroundColor('green')}>green</Text>
-      <Text style={styles.button} onPress={() => setbackgroundColor('red')}>red</Text>
-      <Image style={styles.image} source={picBiscuits} />
-      <Image style={styles.image} source={picJungle} />
-      <Text style={styles.text}>red</Text>
-      <Text style={[styles.text, styles.selectedText]} >blue</Text>
-      <Text style={styles.text}>green</Text>
-      <ActivityIndicator size="large" color="#61DBFB" />
-      <Button title="click me" style={{ marginVertical: 50 }} onPress={onButtonPress} />
-      <Text>OS : {Platform.OS}</Text>
-      <Text>Height : {height}</Text>
-      <Text>Width : {width}</Text> */}
-    </View>
+    <FlatList style={[styles.container, { backgroundColor }]}
+      data={defaultColors}
+      renderItem={({ item }) => {
+        return (
+          <ColorButton key={item.id} backgroundColor={item.color} onPress={setbackgroundColor} />
+        )
+      }
+      }
+    />
+    // {/* <Text style={styles.button} onPress={() => setbackgroundColor('green')}>green</Text>
+    // <Text style={styles.button} onPress={() => setbackgroundColor('red')}>red</Text>
+    // <Image style={styles.image} source={picBiscuits} />
+    // <Image style={styles.image} source={picJungle} />
+    // <Text style={styles.text}>red</Text>
+    // <Text style={[styles.text, styles.selectedText]} >blue</Text>
+    // <Text style={styles.text}>green</Text>
+    // <ActivityIndicator size="large" color="#61DBFB" />
+    // <Button title="click me" style={{ marginVertical: 50 }} onPress={onButtonPress} />
+    // <Text>OS : {Platform.OS}</Text>
+    // <Text>Height : {height}</Text>
+    // <Text>Width : {width}</Text> */}
+
   );
 }
 
@@ -50,8 +55,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 
   // page: {
