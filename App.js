@@ -12,22 +12,42 @@ import {
   TouchableHighlight,
   FlatList
 } from 'react-native';
+import { generate } from 'shortid';
 import picBiscuits from './assets/biscuit.jpg';
 import picJungle from './assets/jungle.jpg';
-import defaultColors from './data/defaultColors.json';
 import ColorButton from './components/ColorButton';
+import ColorForm from './components/ColorForm';
 
 
 
-const { height, width } = Dimensions.get('window');
+// const { height, width } = Dimensions.get('window');
+
+const useColors = () => {
+  const [colors,setColors] = useState([]);
+  const addColor = color => {
+    const newColor = {id : generate(), color};
+    setColors([newColor, ...colors]);
+  }
+
+  return { colors, addColor};
+}
+
+
 export default function App() {
   const [backgroundColor, setbackgroundColor] = useState('blue');
-  const onButtonPress = () => {
-    Alert.alert(`${new Date().toLocaleTimeString()} button press`);
-  };
+  // const [colors,setColors] = useState([]);
+  // const addColor = color => {
+  //   const newColor = {id : generate(), color};
+  //   setColors([newColor, ...colors]);
+  // }
+  
+  const {colors , addColor} = useColors();
+  
   return (
+    <>
+    <ColorForm onNewColor={addColor} />
     <FlatList style={[styles.container, { backgroundColor }]}
-      data={defaultColors}
+      data = {colors}
       renderItem={({ item }) => {
         return (
           <ColorButton key={item.id} backgroundColor={item.color} onPress={setbackgroundColor} />
@@ -35,6 +55,7 @@ export default function App() {
       }
       }
     />
+    </>
     // {/* <Text style={styles.button} onPress={() => setbackgroundColor('green')}>green</Text>
     // <Text style={styles.button} onPress={() => setbackgroundColor('red')}>red</Text>
     // <Image style={styles.image} source={picBiscuits} />
