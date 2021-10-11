@@ -12,25 +12,17 @@ import {
   TouchableHighlight,
   FlatList
 } from 'react-native';
-import { generate } from 'shortid';
 import picBiscuits from './assets/biscuit.jpg';
 import picJungle from './assets/jungle.jpg';
 import ColorButton from './components/ColorButton';
 import ColorForm from './components/ColorForm';
+import { useColors } from './hooks';
 
 
 
 // const { height, width } = Dimensions.get('window');
 
-const useColors = () => {
-  const [colors,setColors] = useState([]);
-  const addColor = color => {
-    const newColor = {id : generate(), color};
-    setColors([newColor, ...colors]);
-  }
 
-  return { colors, addColor};
-}
 
 
 export default function App() {
